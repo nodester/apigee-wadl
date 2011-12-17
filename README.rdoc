@@ -1,0 +1,11 @@
+= Nodester REST API WADL file
+
+These REST API descriptors can be used for services such as Apigee.  REST services include:
+
+* Nodester - http://nodester.com/api
+
+= Demo
+
+You can check out the Apigee demo online at 
+
+* Nodester - https://apigee.com/
