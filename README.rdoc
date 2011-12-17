@@ -8,4 +8,4 @@ These REST API descriptors can be used for services such as Apigee.  REST servic
 
 You can check out the Apigee demo online at 
 
-* Nodester - https://apigee.com/
+* Nodester - https://apigee.com/chris17/embed/console/nodester-api

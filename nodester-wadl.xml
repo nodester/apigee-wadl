@@ -8,127 +8,97 @@
   <!-- Base defines the domain and base path of the endpoint --> 
   <resources base="http://api.nodester.com"> 
  
-    <resource path="smsmessaging/outbound/{senderAddress}/requests"> 
+    <resource path="coupon"> 
       <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
 
       <!-- Methods should each have a unique id. --> 
       <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
-      <method id="send_smsmessage" name="POST" apigee:displayName="SendSMS"> 
+      <method id="request_coupon" name="POST" apigee:displayName="RequestCoupon"> 
 
         <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
         <apigee:tags> 
-          <apigee:tag primary="true">Outbound SMS</apigee:tag> 
-          <apigee:tag>SendSMS</apigee:tag> 
+          <apigee:tag primary="true">Coupon</apigee:tag> 
+          <apigee:tag>RequestCoupon</apigee:tag> 
         </apigee:tags> 
  
         <!-- Is authentication required for this method? --> 
-        <apigee:authentication required="true" /> 
+        <apigee:authentication required="false" /> 
  
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/smsmessaging/outbound/{senderAddress}/requests" /> 
+        <apigee:example url="/coupon" /> 
  
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
-	    <doc title="" apigee:url="http://smsified.com/sms-api-documentation/sending#sending"> 
-		  Sends a 160 character SMS message from your SMSified phone number to any US mobile number.
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Submits a registration coupon request for nodester node.js hosting.
 	    </doc> 
 	
 		<request>
-			<param name="address" required="true" type="xsd:string" style="query" default="1234567890"> 
+			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
+			<param name="email" required="true" type="xsd:string" style="query" default=""> 
 		      <!-- Docs are optional, but recommended. --> 
-		      <doc>Specifies the 10-digit phone number to send the SMS message to.</doc> 
+		      <doc>The email address where you would like the nodester coupon sent</doc> 
 		    </param> 
-
-		    <!-- If a param is required, specify so. Default values can also be supplied. --> 
-		    <param name="message" required="true" type="xsd:string" style="query" default=""> 
-		      <doc>Specifies the 160 character SMS message to deliver.</doc> 
-		    </param> 
-
-		    <param name="notifyURL" required="false" type="xsd:string" style="query" default=""> 
-		      <doc>If you want to set a callback URL for your SMS, you would use the notifyURL parameter, which will allow you to receive status information about the sent SMS (including the destination address, sender's address, the message itself and the status code). If the message was successfully delivered, the code field will always read 0; if the SMS could not be delivered, possibly due to exceeded rate limits or a bad phone number, there are a variety of additional codes to help you identify the problem.</doc> 
-		    </param> 
-
 		</request> 
 	
       </method> 
     </resource>  
 
-    <resource path="smsmessaging/outbound/{senderAddress}/requests/{requestId}/deliveryInfos"> 
+    <resource path="user"> 
       <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
 
       <!-- Methods should each have a unique id. --> 
       <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
-      <method id="delivery_status" name="GET" apigee:displayName="DeliveryStatus"> 
+      <method id="create_user" name="POST" apigee:displayName="CreateUser"> 
 	
 	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
         <apigee:tags> 
-          <apigee:tag primary="true">Outbound SMS</apigee:tag> 
-          <apigee:tag>DeliveryStatus</apigee:tag> 
+          <apigee:tag primary="true">User</apigee:tag> 
+          <apigee:tag>CreateUser</apigee:tag> 
         </apigee:tags> 
     
   
         <!-- Is authentication required for this method? --> 
-        <apigee:authentication required="true" /> 
+        <apigee:authentication required="false" /> 
  
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/smsmessaging/outbound/{senderAddress}/requests/{requestId}/deliveryInfos" /> 
+        <apigee:example url="/user" /> 
  
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
-	    <doc title="" apigee:url="http://smsified.com/sms-api-documentation/sending#checking_status"> 
-		  If you want to check your delivery status before all your messages may have sent out (especially useful if you send an SMS to multiple addresses), you can pull a Delivery Status report using the requestId displayed in Response JSON. This is different than the other reporting options, as it functions in realtime - reporting only shows messages once they've successfully sent to the network or failed completely.
-	    </doc> 
-      </method> 
-    </resource>  
-
-	<!-- OUTBOUND -->
-	<!-- SET SUBSCRIBE -->
-    <resource path="smsmessaging/outbound/{senderAddress}/subscriptions"> 
-      <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
-
-      <!-- Methods should each have a unique id. --> 
-      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
-      <method id="set_outbound_subscribe" name="POST" apigee:displayName="SetSubscribe"> 
-	
-	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
-        <apigee:tags> 
-          <apigee:tag primary="true">Outbound SMS</apigee:tag> 
-          <apigee:tag>SetSubscribe</apigee:tag> 
-        </apigee:tags> 
-    
-  
-        <!-- Is authentication required for this method? --> 
-        <apigee:authentication required="true" /> 
- 
-        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/smsmessaging/outbound/{senderAddress}/subscriptions" /> 
- 
-        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
-	    <doc title="" apigee:url="http://smsified.com/sms-api-documentation/sending#checking_status"> 
-		  If you want to check your delivery status before all your messages may have sent out (especially useful if you send an SMS to multiple addresses), you can pull a Delivery Status report using the requestId displayed in Response JSON. This is different than the other reporting options, as it functions in realtime - reporting only shows messages once they've successfully sent to the network or failed completely.
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Creates a nodester user account with the coupon code received.
 	    </doc> 
 	
 		<request>
-		    <param name="notifyURL" required="true" type="xsd:string" style="query" default=""> 
-		      <doc>Instead of setting a callback URL using the notifyURL parameter every time you send a text message, you can set an outbound subscription. With a subscription, you set the callback URL one time and tie it to the phone number, then every time a text message goes out, you'll receive the delivery notification automatically. If you set a value for notifyURL when you send a text message and also have an active subscription, the delivery info will be sent to both URLs.</doc> 
+			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
+			
+		    <param name="coupon" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Coupon code received from nodester</doc> 
+		    </param> 
+		    <param name="user" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Desired username on nodester</doc> 
+		    </param> 
+		    <param name="password" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Desired password on nodester (do not use special characters like @ symbol)</doc> 
+		    </param> 
+		    <param name="email" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Desired email address on nodester</doc> 
+		    </param> 
+		    <param name="rsakey" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Your RSA key. Ensure that all + in the ssh key are substituted for their %2B counter parts, else your key will break. Run this on your command line to copy your RSA string and swap out the plus signs: "cat ~/.ssh/id_rsa.pub | sed s/'+'/'%2B'/g | pbcopy</doc> 
 		    </param> 
 
 		</request> 
 	
       </method> 
-    </resource>  
-
-	<!-- VIEW SUBSCRIBE -->
-    <resource path="smsmessaging/outbound/subscriptions?senderAddress={senderAddress}"> 
-	
-      <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
 
       <!-- Methods should each have a unique id. --> 
       <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
-      <method id="view_outbound_subscribe" name="GET" apigee:displayName="ViewSubscribe"> 
+      <method id="update_user" name="PUT" apigee:displayName="UpdateUser"> 
 	
 	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
         <apigee:tags> 
-          <apigee:tag primary="true">Outbound SMS</apigee:tag> 
-          <apigee:tag>ViewSubscribe</apigee:tag> 
+          <apigee:tag primary="true">User</apigee:tag> 
+          <apigee:tag>UpdateUser</apigee:tag> 
         </apigee:tags> 
     
   
@@ -136,98 +106,38 @@
         <apigee:authentication required="true" /> 
  
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/smsmessaging/outbound/subscriptions?senderAddress={senderAddress}" /> 
+        <apigee:example url="/user" /> 
  
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
-	    <doc title="" apigee:url="http://smsified.com/sms-api-documentation/sending#checking_status"> 
-		  If you want to check your delivery status before all your messages may have sent out (especially useful if you send an SMS to multiple addresses), you can pull a Delivery Status report using the requestId displayed in Response JSON. This is different than the other reporting options, as it functions in realtime - reporting only shows messages once they've successfully sent to the network or failed completely. Note: If you omit the senderAddress, you'll see a list of all your outbound subscriptions.
-	    </doc> 
-      </method> 
-    </resource>  
-
-	<!-- DELETE SUBSCRIBE -->
-    <resource path="smsmessaging/outbound/subscriptions/{subscriptionId}"> 
-
-      <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
-
-      <!-- Methods should each have a unique id. --> 
-      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
-      <method id="delete_outbound_subscribe" name="DELETE" apigee:displayName="DeleteSubscribe"> 
-	
-	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
-        <apigee:tags> 
-          <apigee:tag primary="true">Outbound SMS</apigee:tag> 
-          <apigee:tag>DeleteSubscribe</apigee:tag> 
-        </apigee:tags> 
-    
-  
-        <!-- Is authentication required for this method? --> 
-        <apigee:authentication required="true" /> 
- 
-        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/smsmessaging/outbound/subscriptions/{subscriptionId}" /> 
- 
-        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
-	    <doc title="" apigee:url="http://smsified.com/sms-api-documentation/sending#checking_status"> 
-		  If you want to check your delivery status before all your messages may have sent out (especially useful if you send an SMS to multiple addresses), you can pull a Delivery Status report using the requestId displayed in Response JSON. This is different than the other reporting options, as it functions in realtime - reporting only shows messages once they've successfully sent to the network or failed completely.
-	    </doc> 
-      </method> 
-    </resource>  
-
-	<!-- INBOUND -->
-	<!-- SET SUBSCRIBE -->
-    <resource path="smsmessaging/inbound/subscriptions"> 
-      <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
-
-      <!-- Methods should each have a unique id. --> 
-      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
-      <method id="set_inbound_subscribe" name="POST" apigee:displayName="SetSubscribe"> 
-	
-	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
-        <apigee:tags> 
-          <apigee:tag primary="true">Inbound SMS</apigee:tag> 
-          <apigee:tag>SetSubscribe</apigee:tag> 
-        </apigee:tags> 
-    
-  
-        <!-- Is authentication required for this method? --> 
-        <apigee:authentication required="true" /> 
- 
-        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/smsmessaging/inbound/subscriptions" /> 
- 
-        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
-	    <doc title="" apigee:url="http://smsified.com/sms-api-documentation/receiving"> 
-		  If you want to check your delivery status before all your messages may have sent out (especially useful if you send an SMS to multiple addresses), you can pull a Delivery Status report using the requestId displayed in Response JSON. This is different than the other reporting options, as it functions in realtime - reporting only shows messages once they've successfully sent to the network or failed completely.
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Update a nodester user account i.e. change password, email, rsakey.
 	    </doc> 
 	
 		<request>
-		    <param name="destinationAddress" required="true" type="xsd:string" style="query" default=""> 
-		      <doc>Application phone number to receive messages.</doc> 
+			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
+			
+		    <param name="password" required="false" type="xsd:string" style="query" default=""> 
+		      <doc>Desired password on nodester (do not use special characters like @ symbol)</doc> 
 		    </param> 
-		    <param name="notifyURL" required="true" type="xsd:string" style="query" default=""> 
-		      <doc>With an inbound subscription, every time a text message is sent to the phone number associated with the subscription, the message will be sent to your URL. This is the same thing you can achieve through the User Interface (outlined in the Receiving a Text Message Quickstart), but using the API you can attach multiple URLs though multiple subscriptions.</doc> 
+		    <param name="email" required="false" type="xsd:string" style="query" default=""> 
+		      <doc>Desired email address on nodester</doc> 
+		    </param> 
+		    <param name="rsakey" required="false" type="xsd:string" style="query" default=""> 
+		      <doc>Your RSA key. Ensure that all + in the ssh key are substituted for their %2B counter parts, else your key will break. Run this on your command line to copy your RSA string and swap out the plus signs: "cat ~/.ssh/id_rsa.pub | sed s/'+'/'%2B'/g | pbcopy</doc> 
 		    </param> 
 
 		</request> 
 	
-	
       </method> 
-    </resource>  
-
-	<!-- VIEW SUBSCRIBE -->
-    <resource path="smsmessaging/inbound/subscriptions?destinationAddress={destinationAddress}"> 
-	
-      <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
 
       <!-- Methods should each have a unique id. --> 
       <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
-      <method id="view_inbound_subscribe" name="GET" apigee:displayName="ViewSubscribe"> 
+      <method id="delete_user" name="DELETE" apigee:displayName="DeleteUser"> 
 	
 	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
         <apigee:tags> 
-          <apigee:tag primary="true">Inbound SMS</apigee:tag> 
-          <apigee:tag>ViewSubscribe</apigee:tag> 
+          <apigee:tag primary="true">User</apigee:tag> 
+          <apigee:tag>DeleteUser</apigee:tag> 
         </apigee:tags> 
     
   
@@ -235,28 +145,54 @@
         <apigee:authentication required="true" /> 
  
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/smsmessaging/inbound/subscriptions?destinationAddress={destinationAddress}" /> 
+        <apigee:example url="/user" /> 
  
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
-	    <doc title="" apigee:url="http://smsified.com/sms-api-documentation/receiving"> 
-		  It's likely if you're setting subscriptions, at some point you'll want to check out which ones are tied to a particular number. A simple GET on the proper URL gets you what you need. Note: If you omit the destinationAddress, you'll see a list of all your inbound subscriptions.
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Delete your nodester user account.
 	    </doc> 
+		
       </method> 
     </resource>  
 
-	<!-- DELETE SUBSCRIBE -->
-    <resource path="smsmessaging/inbound/subscriptions/{subscriptionId}"> 
-
+    <resource path="apps"> 
       <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
 
       <!-- Methods should each have a unique id. --> 
       <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
-      <method id="delete_inbound_subscribe" name="DELETE" apigee:displayName="DeleteSubscribe"> 
+      <method id="get_apps" name="GET" apigee:displayName="GetApps"> 
+
+        <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
+        <apigee:tags> 
+          <apigee:tag primary="true">Apps</apigee:tag> 
+          <apigee:tag>GetApps</apigee:tag> 
+        </apigee:tags> 
+ 
+        <!-- Is authentication required for this method? --> 
+        <apigee:authentication required="true" /> 
+ 
+        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
+        <apigee:example url="/apps" /> 
+ 
+        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Gets a listing of your nodester apps.
+	    </doc> 
+	
+      </method> 
+    </resource>  
+
+    <resource path="app"> 
+      <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
+
+      <!-- Methods should each have a unique id. --> 
+      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
+      <method id="create_app" name="POST" apigee:displayName="CreateApp"> 
 	
 	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
         <apigee:tags> 
-          <apigee:tag primary="true">Inbound SMS</apigee:tag> 
-          <apigee:tag>DeleteSubscribe</apigee:tag> 
+          <apigee:tag primary="true">App</apigee:tag> 
+          <apigee:tag>CreateApp</apigee:tag> 
         </apigee:tags> 
     
   
@@ -264,122 +200,574 @@
         <apigee:authentication required="true" /> 
  
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/smsmessaging/inbound/subscriptions/{subscriptionId}" /> 
+        <apigee:example url="/app" /> 
  
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
-	    <doc title="" apigee:url="http://smsified.com/sms-api-documentation/receiving"> 
-		  If you can create a subscription, you'll obviously need the ability to remove one as well. A DELETE with the right URL handles this for you.
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Creates a nodester application.
 	    </doc> 
+	
+		<request>
+			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
+			
+		    <param name="appname" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Desired application name on nodester</doc> 
+		    </param> 
+		    <param name="start" required="false" type="xsd:string" style="query" default=""> 
+		      <doc>Name of your starting javascript file if not server.js</doc> 
+		    </param> 
+
+		</request> 
+	
       </method> 
+
+      <!-- Methods should each have a unique id. --> 
+      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
+      <method id="update_app" name="PUT" apigee:displayName="UpdateApp"> 
+	
+	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
+        <apigee:tags> 
+          <apigee:tag primary="true">App</apigee:tag> 
+          <apigee:tag>UpdateApp</apigee:tag> 
+        </apigee:tags> 
+    
+  
+        <!-- Is authentication required for this method? --> 
+        <apigee:authentication required="true" /> 
+ 
+        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
+        <apigee:example url="/app" /> 
+ 
+        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Update a nodester application i.e. change its starting javascript file name.
+	    </doc> 
+	
+		<request>
+			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
+			
+		    <param name="appname" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Desired application name on nodester</doc> 
+		    </param> 
+		    <param name="start" required="false" type="xsd:string" style="query" default=""> 
+		      <doc>Name of your starting javascript file if not server.js</doc> 
+		    </param> 
+
+		</request> 
+	
+      </method> 
+
+      <!-- Methods should each have a unique id. --> 
+      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
+      <method id="startstop_app" name="PUT" apigee:displayName="StartStopApp"> 
+	
+	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
+        <apigee:tags> 
+          <apigee:tag primary="true">App</apigee:tag> 
+          <apigee:tag>Start/Stop App</apigee:tag> 
+        </apigee:tags> 
+    
+  
+        <!-- Is authentication required for this method? --> 
+        <apigee:authentication required="true" /> 
+ 
+        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
+        <apigee:example url="/app" /> 
+ 
+        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Start or stop a nodester application.
+	    </doc> 
+	
+		<request>
+			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
+			
+		    <param name="appname" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Desired application name on nodester</doc> 
+		    </param> 
+		    <param name="running" required="true" type="xsd:string" style="query" default="true"> 
+		      <doc>Set running to true or false to start or stop your application</doc> 
+		    </param> 
+
+		</request> 
+	
+      </method> 
+
+
+      <!-- Methods should each have a unique id. --> 
+      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
+      <method id="delete_app" name="DELETE" apigee:displayName="DeleteApp"> 
+	
+	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
+        <apigee:tags> 
+          <apigee:tag primary="true">App</apigee:tag> 
+          <apigee:tag>DeleteApp</apigee:tag> 
+        </apigee:tags> 
+    
+  
+        <!-- Is authentication required for this method? --> 
+        <apigee:authentication required="true" /> 
+ 
+        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
+        <apigee:example url="/app" /> 
+ 
+        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Delete your nodester application.
+	    </doc> 
+	
+		<request>
+			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
+			
+		    <param name="appname" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Name of application to delete on nodester</doc> 
+		    </param> 
+
+		</request> 
+		
+	  </method> 
+      
+	
+	  <method id="app_info" name="GET" apigee:displayName="GetAppInfo"> 
+
+	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
+        <apigee:tags> 
+          <apigee:tag primary="true">App</apigee:tag> 
+          <apigee:tag>GetAppInfo</apigee:tag> 
+        </apigee:tags> 
+
+
+        <!-- Is authentication required for this method? --> 
+        <apigee:authentication required="true" /> 
+
+        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
+        <apigee:example url="/app/{appname}" /> 
+
+        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Get information about your nodester application.
+	    </doc>     
+		
+      </method> 
+
     </resource>  
 
-	<!-- REPORTING ALL MESSAGES -->
-    <resource path="messages"> 
+
+    <resource path="applogs"> 
       <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
 
       <!-- Methods should each have a unique id. --> 
       <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
-      <method id="reporting_allmessages" name="GET" apigee:displayName="AllMessages"> 
- 
+      <method id="request_applogs" name="GET" apigee:displayName="RequestAppLogs"> 
+
         <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
         <apigee:tags> 
-          <apigee:tag primary="true">Reporting</apigee:tag> 
-          <apigee:tag>AllMessages</apigee:tag> 
+          <apigee:tag primary="true">AppLogs</apigee:tag> 
+          <apigee:tag>RequestAppLogs</apigee:tag> 
         </apigee:tags> 
  
         <!-- Is authentication required for this method? --> 
         <apigee:authentication required="true" /> 
  
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/messages" /> 
+        <apigee:example url="/applogs/{appname}" /> 
  
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
-	    <doc title="" apigee:url="http://smsified.com/sms-api-documentation/reporting"> 
-		  SMSified also provides comprehensive reporting, both through Logs in the user interface and programmatically. Reporting can be used to retrieve information about an individual SMS or multiple SMS messages, using a variety of search and filter criteria such as date range, direction, from, to and status. To start, here's an example showing how to retrieve the information for all messages, with no search criteria or filters.
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Fetch your nodester application logs.
 	    </doc> 
+		
       </method> 
     </resource>  
 
-	<!-- REPORTING INDIVIDUAL MESSAGE -->
-    <resource path="messages/{messageId}"> 
+    <resource path="env"> 
       <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
 
       <!-- Methods should each have a unique id. --> 
       <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
-      <method id="reporting_individual" name="GET" apigee:displayName="IndividualMessage"> 
+      <method id="get_env" name="GET" apigee:displayName="GetEnv"> 
+	
+	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
+        <apigee:tags> 
+          <apigee:tag primary="true">Env</apigee:tag> 
+          <apigee:tag>GetEnv</apigee:tag> 
+        </apigee:tags> 
+    
+  
+        <!-- Is authentication required for this method? --> 
+        <apigee:authentication required="true" /> 
  
+        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
+        <apigee:example url="/env" /> 
+ 
+        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Gets environment information on a key.
+	    </doc> 
+	
+		<request>
+			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
+			
+		    <param name="appname" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Provide nodester application name</doc> 
+		    </param> 
+		    <param name="key" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Provide nodester environment key</doc> 
+		    </param> 
+
+		</request> 
+	
+      </method> 
+
+      <!-- Methods should each have a unique id. --> 
+      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
+      <method id="update_env" name="PUT" apigee:displayName="UpdateEnv"> 
+	
+	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
+        <apigee:tags> 
+          <apigee:tag primary="true">Env</apigee:tag> 
+          <apigee:tag>UpdateEnv</apigee:tag> 
+        </apigee:tags> 
+    
+  
+        <!-- Is authentication required for this method? --> 
+        <apigee:authentication required="true" /> 
+ 
+        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
+        <apigee:example url="/env" /> 
+ 
+        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Update a nodester environment key.
+	    </doc> 
+	
+		<request>
+			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
+			
+		    <param name="appname" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Provide nodester application name</doc> 
+		    </param> 
+		    <param name="key" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Provide nodester environment key</doc> 
+		    </param> 
+
+		</request> 
+	
+      </method> 
+
+      <!-- Methods should each have a unique id. --> 
+      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
+      <method id="delete_env" name="DELETE" apigee:displayName="DeleteEnv"> 
+	
+	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
+        <apigee:tags> 
+          <apigee:tag primary="true">Env</apigee:tag> 
+          <apigee:tag>DeleteEnv</apigee:tag> 
+        </apigee:tags> 
+    
+  
+        <!-- Is authentication required for this method? --> 
+        <apigee:authentication required="true" /> 
+ 
+        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
+        <apigee:example url="/env" /> 
+ 
+        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Delete nodester environment key.
+	    </doc> 
+	
+		<request>
+			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
+			
+		    <param name="appname" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Provide nodester application name</doc> 
+		    </param> 
+		    <param name="key" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Provide nodester environment key</doc> 
+		    </param> 
+
+		</request> 
+		
+      </method> 
+    </resource>  
+
+    <resource path="status"> 
+      <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
+
+      <!-- Methods should each have a unique id. --> 
+      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
+      <method id="get_status" name="GET" apigee:displayName="GetStatus"> 
+
         <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
         <apigee:tags> 
-          <apigee:tag primary="true">Reporting</apigee:tag> 
-          <apigee:tag>IndividualMessage</apigee:tag> 
+          <apigee:tag primary="true">Status</apigee:tag> 
+          <apigee:tag>GetStatus</apigee:tag> 
+        </apigee:tags> 
+ 
+        <!-- Is authentication required for this method? --> 
+        <apigee:authentication required="false" /> 
+ 
+        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
+        <apigee:example url="/status" /> 
+ 
+        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Gets nodester system status.
+	    </doc> 
+	
+      </method> 
+    </resource>  
+
+    <resource path="npm"> 
+      <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
+
+      <!-- Methods should each have a unique id. --> 
+      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
+      <method id="npm_install" name="POST" apigee:displayName="NPMinstall"> 
+
+        <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
+        <apigee:tags> 
+          <apigee:tag primary="true">NPM</apigee:tag> 
+          <apigee:tag>NPMinstall</apigee:tag> 
         </apigee:tags> 
  
         <!-- Is authentication required for this method? --> 
         <apigee:authentication required="true" /> 
  
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/messages/{messageId}" /> 
+        <apigee:example url="/npm" /> 
  
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
-	    <doc title="" apigee:url="http://smsified.com/sms-api-documentation/reporting"> 
-		  SMSified also provides comprehensive reporting, both through Logs in the user interface and programmatically. Reporting can be used to retrieve information about an individual SMS or multiple SMS messages, using a variety of search and filter criteria such as date range, direction, from, to and status. To start, here's an example showing how to retrieve the information for all messages, with no search criteria or filters.
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Install, uninstall, and update NPM modules on your nodester application.
 	    </doc> 
+	
+		<request>
+			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
+			<param name="appname" required="true" type="xsd:string" style="query" default=""> 
+		      <!-- Docs are optional, but recommended. --> 
+		      <doc>Provide nodester application name</doc> 
+		    </param> 
+			<param name="action" required="true" type="xsd:string" style="query" default="install"> 
+		      <!-- Docs are optional, but recommended. --> 
+		      <doc>Values can be install, uninstall, or update</doc> 
+		    </param> 
+			<param name="package" required="true" type="xsd:string" style="query" default=""> 
+		      <!-- Docs are optional, but recommended. --> 
+		      <doc>Provide the name of the NPM module</doc> 
+		    </param> 
+		</request> 
+	
       </method> 
     </resource>  
 
-	<!-- REPORTING MESSAGES BY FILTER -->
-    <resource path="messages?startDate=2011-02-14&amp;endDate=2011-02-15"> 
+    <resource path="appdomains"> 
       <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
 
       <!-- Methods should each have a unique id. --> 
       <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
-      <method id="reporting_FilteredByDate" name="GET" apigee:displayName="FilteredByDate"> 
+      <method id="get_domains" name="GET" apigee:displayName="GetDomains"> 
+	
+	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
+        <apigee:tags> 
+          <apigee:tag primary="true">AppDomains</apigee:tag> 
+          <apigee:tag>GetDomains</apigee:tag> 
+        </apigee:tags> 
+    
+  
+        <!-- Is authentication required for this method? --> 
+        <apigee:authentication required="true" /> 
  
+        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
+        <apigee:example url="/appdomains" /> 
+ 
+        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Gets list of your domains.
+	    </doc> 
+		
+      </method> 
+
+      <!-- Methods should each have a unique id. --> 
+      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
+      <method id="create_domain" name="POST" apigee:displayName="CreateDomain"> 
+	
+	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
+        <apigee:tags> 
+          <apigee:tag primary="true">AppDomains</apigee:tag> 
+          <apigee:tag>CreateDomain</apigee:tag> 
+        </apigee:tags> 
+    
+  
+        <!-- Is authentication required for this method? --> 
+        <apigee:authentication required="true" /> 
+ 
+        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
+        <apigee:example url="/appdomains" /> 
+ 
+        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Creates app domain for hosting example.com.
+	    </doc> 
+	
+		<request>
+			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
+			
+		    <param name="appname" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Provide nodester application name</doc> 
+		    </param> 
+		    <param name="domain" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Provide your domain such as example.com to nodester</doc> 
+		    </param> 
+
+		</request> 
+	
+      </method> 
+
+      <!-- Methods should each have a unique id. --> 
+      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
+      <method id="delete_domain" name="DELETE" apigee:displayName="DeleteDomain"> 
+	
+	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
+        <apigee:tags> 
+          <apigee:tag primary="true">AppDomains</apigee:tag> 
+          <apigee:tag>DeleteDomain</apigee:tag> 
+        </apigee:tags> 
+    
+  
+        <!-- Is authentication required for this method? --> 
+        <apigee:authentication required="true" /> 
+ 
+        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
+        <apigee:example url="/appdomains" /> 
+ 
+        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Deletes app domain for hosting example.com.
+	    </doc> 
+	
+		<request>
+			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
+			
+		    <param name="appname" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Provide nodester application name</doc> 
+		    </param> 
+		    <param name="domain" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Provide your domain such as example.com to nodester</doc> 
+		    </param> 
+
+		</request> 
+		
+      </method> 
+    </resource>  
+
+    <resource path="reset_password"> 
+      <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
+
+      <!-- Methods should each have a unique id. --> 
+      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
+      <method id="reset_password_post" name="POST" apigee:displayName="ResetPasswordRequest"> 
+	
+	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
+        <apigee:tags> 
+          <apigee:tag primary="true">ResetPassword</apigee:tag> 
+          <apigee:tag>ResetPasswordRequest</apigee:tag> 
+        </apigee:tags> 
+    
+  
+        <!-- Is authentication required for this method? --> 
+        <apigee:authentication required="false" /> 
+ 
+        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
+        <apigee:example url="/reset_password" /> 
+ 
+        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Sends a e-mail with a token to reset your user password.
+	    </doc> 
+	
+		<request>
+			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
+			
+		    <param name="user" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Provide your nodester username</doc> 
+		    </param> 
+
+		</request> 
+	
+      </method> 
+
+      <!-- Methods should each have a unique id. --> 
+      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
+      <method id="reset_password_put" name="PUT" apigee:displayName="ResetPasswordToken"> 
+	
+	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
+        <apigee:tags> 
+          <apigee:tag primary="true">ResetPassword</apigee:tag> 
+          <apigee:tag>ResetPasswordToken</apigee:tag> 
+        </apigee:tags> 
+    
+  
+        <!-- Is authentication required for this method? --> 
+        <apigee:authentication required="true" /> 
+ 
+        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
+        <apigee:example url="/reset_password/{token}" /> 
+ 
+        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Updates your password using the provided token.
+	    </doc> 
+	
+		<request>
+			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
+			
+		    <param name="password" required="true" type="xsd:string" style="query" default=""> 
+		      <doc>Provide your new nodester password</doc> 
+		    </param> 
+
+		</request> 
+	
+      </method> 
+
+    </resource>  
+
+    <resource path="gitreset"> 
+      <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
+
+      <!-- Methods should each have a unique id. --> 
+      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
+      <method id="git-reset" name="POST" apigee:displayName="GitReset"> 
+
         <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
         <apigee:tags> 
-          <apigee:tag primary="true">Reporting</apigee:tag> 
-          <apigee:tag>FilteredByDate</apigee:tag> 
+          <apigee:tag primary="true">GitReset</apigee:tag> 
+          <apigee:tag>GitReset</apigee:tag> 
         </apigee:tags> 
  
         <!-- Is authentication required for this method? --> 
         <apigee:authentication required="true" /> 
  
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/messages?startDate=2011-02-14&amp;endDate=2011-02-15" /> 
+        <apigee:example url="/gitreset" /> 
  
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
-	    <doc title="" apigee:url="http://smsified.com/sms-api-documentation/reporting"> 
-		  SMSified also provides comprehensive reporting, both through Logs in the user interface and programmatically. Reporting can be used to retrieve information about an individual SMS or multiple SMS messages, using a variety of search and filter criteria such as date range, direction, from, to and status. To start, here's an example showing how to retrieve the information for all messages, with no search criteria or filters.
+	    <doc title="" apigee:url="http://nodester.com/api.html"> 
+		  Resets your Nodester git repository and npm list.
 	    </doc> 
+	
+		<request>
+			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
+			<param name="appname" required="true" type="xsd:string" style="query" default=""> 
+		      <!-- Docs are optional, but recommended. --> 
+		      <doc>Provide nodester appname to reset</doc> 
+		    </param> 
+		</request> 
+	
       </method> 
     </resource>  
 
-	<!-- REPORTING MESSAGES BY FILTER -->
-    <resource path="messages?status=fail&amp;direction=in"> 
-      <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
-
-      <!-- Methods should each have a unique id. --> 
-      <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
-      <method id="reporting_FilteredByStatusDirection" name="GET" apigee:displayName="FilteredByStatusDirection"> 
- 
-        <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
-        <apigee:tags> 
-          <apigee:tag primary="true">Reporting</apigee:tag> 
-          <apigee:tag>FilteredByStatusDirection</apigee:tag> 
-        </apigee:tags> 
- 
-        <!-- Is authentication required for this method? --> 
-        <apigee:authentication required="true" /> 
- 
-        <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/messages?status=fail&amp;direction=in" /> 
- 
-        <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
-	    <doc title="" apigee:url="http://smsified.com/sms-api-documentation/reporting"> 
-		  SMSified also provides comprehensive reporting, both through Logs in the user interface and programmatically. Reporting can be used to retrieve information about an individual SMS or multiple SMS messages, using a variety of search and filter criteria such as date range, direction, from, to and status. To start, here's an example showing how to retrieve the information for all messages, with no search criteria or filters.
-	    </doc> 
-      </method> 
-    </resource>  
 
 
   </resources> 
