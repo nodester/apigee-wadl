@@ -213,7 +213,7 @@
 		    <param name="appname" required="true" type="xsd:string" style="query" default=""> 
 		      <doc>Desired application name on nodester</doc> 
 		    </param> 
-		    <param name="start" required="false" type="xsd:string" style="query" default=""> 
+		    <param name="start" required="true" type="xsd:string" style="query" default="server.js"> 
 		      <doc>Name of your starting javascript file if not server.js</doc> 
 		    </param> 
 
@@ -249,7 +249,7 @@
 		    <param name="appname" required="true" type="xsd:string" style="query" default=""> 
 		      <doc>Desired application name on nodester</doc> 
 		    </param> 
-		    <param name="start" required="false" type="xsd:string" style="query" default=""> 
+		    <param name="start" required="true" type="xsd:string" style="query" default=""> 
 		      <doc>Name of your starting javascript file if not server.js</doc> 
 		    </param> 
 
@@ -358,12 +358,12 @@
 
       <!-- Methods should each have a unique id. --> 
       <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
-      <method id="request_applogs" name="GET" apigee:displayName="RequestAppLogs"> 
+      <method id="get_applogs" name="GET" apigee:displayName="GetAppLogs"> 
 
         <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
         <apigee:tags> 
           <apigee:tag primary="true">AppLogs</apigee:tag> 
-          <apigee:tag>RequestAppLogs</apigee:tag> 
+          <apigee:tag>GetAppLogs</apigee:tag> 
         </apigee:tags> 
  
         <!-- Is authentication required for this method? --> 
