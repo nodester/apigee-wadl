@@ -309,21 +309,21 @@
         <apigee:authentication required="true" /> 
  
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/app" /> 
+        <apigee:example url="/app/{appname}" /> 
  
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
 	    <doc title="" apigee:url="http://nodester.com/api.html"> 
 		  Delete your nodester application.
 	    </doc> 
 	
-		<request>
+		<!-- <request>
 			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
 			
 		    <param name="appname" required="true" type="xsd:string" style="query" default=""> 
 		      <doc>Name of application to delete on nodester</doc> 
 		    </param> 
 
-		</request> 
+		</request>  -->
 		
 	  </method> 
       
@@ -470,14 +470,14 @@
         <apigee:authentication required="true" /> 
  
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/env" /> 
+        <apigee:example url="/env/{appname}/{key}" /> 
  
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
 	    <doc title="" apigee:url="http://nodester.com/api.html"> 
 		  Delete nodester environment key.
 	    </doc> 
 	
-		<request>
+		<!-- <request>
 			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
 			
 		    <param name="appname" required="true" type="xsd:string" style="query" default=""> 
@@ -487,7 +487,7 @@
 		      <doc>Provide nodester environment key</doc> 
 		    </param> 
 
-		</request> 
+		</request>  -->
 		
       </method> 
     </resource>  
@@ -640,14 +640,14 @@
         <apigee:authentication required="true" /> 
  
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/appdomains" /> 
+        <apigee:example url="/appdomains/{appname}/{domain}" /> 
  
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
 	    <doc title="" apigee:url="http://nodester.com/api.html"> 
 		  Deletes app domain for hosting example.com.
 	    </doc> 
 	
-		<request>
+		<!-- <request>
 			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
 			
 		    <param name="appname" required="true" type="xsd:string" style="query" default=""> 
@@ -657,7 +657,7 @@
 		      <doc>Provide your domain such as example.com to nodester</doc> 
 		    </param> 
 
-		</request> 
+		</request>  -->
 		
       </method> 
     </resource>  
@@ -738,7 +738,7 @@
 
       <!-- Methods should each have a unique id. --> 
       <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
-      <method id="git-reset" name="POST" apigee:displayName="GitReset"> 
+      <method id="git-reset" name="DELETE" apigee:displayName="GitReset"> 
 
         <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
         <apigee:tags> 
@@ -750,21 +750,13 @@
         <apigee:authentication required="true" /> 
  
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/gitreset" /> 
+        <apigee:example url="/gitreset/{appname}" /> 
  
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
 	    <doc title="" apigee:url="http://nodester.com/api.html"> 
 		  Resets your Nodester git repository and npm list.
 	    </doc> 
-	
-		<request>
-			<param name="Content-Type" required="true" type="xsd:string" style="header" default="application/x-www-form-urlencoded"/>
-			<param name="appname" required="true" type="xsd:string" style="query" default=""> 
-		      <!-- Docs are optional, but recommended. --> 
-		      <doc>Provide nodester appname to reset</doc> 
-		    </param> 
-		</request> 
-	
+		
       </method> 
     </resource>  
 
