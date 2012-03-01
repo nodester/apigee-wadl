@@ -180,10 +180,7 @@
 	    </doc> 
 	
       </method> 
-    </resource>  
 
-    <resource path="app"> 
-      <!-- Resources that are the same but have multiple verbs can have multiple method items in the WADL. --> 
 
       <!-- Methods should each have a unique id. --> 
       <!-- The attribute displayName can be used to control the name that appears in the list in the Console. --> 
@@ -191,7 +188,7 @@
 	
 	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
         <apigee:tags> 
-          <apigee:tag primary="true">App</apigee:tag> 
+          <apigee:tag primary="true">Apps</apigee:tag> 
           <apigee:tag>CreateApp</apigee:tag> 
         </apigee:tags> 
     
@@ -200,7 +197,7 @@
         <apigee:authentication required="true" /> 
  
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/app" /> 
+        <apigee:example url="/apps" /> 
  
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
 	    <doc title="" apigee:url="http://nodester.com/api.html"> 
@@ -227,7 +224,7 @@
 	
 	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
         <apigee:tags> 
-          <apigee:tag primary="true">App</apigee:tag> 
+          <apigee:tag primary="true">Apps</apigee:tag> 
           <apigee:tag>UpdateApp</apigee:tag> 
         </apigee:tags> 
     
@@ -236,7 +233,7 @@
         <apigee:authentication required="true" /> 
  
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/app" /> 
+        <apigee:example url="/apps" /> 
  
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
 	    <doc title="" apigee:url="http://nodester.com/api.html"> 
@@ -263,7 +260,7 @@
 	
 	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
         <apigee:tags> 
-          <apigee:tag primary="true">App</apigee:tag> 
+          <apigee:tag primary="true">Apps</apigee:tag> 
           <apigee:tag>Start/Stop App</apigee:tag> 
         </apigee:tags> 
     
@@ -272,7 +269,7 @@
         <apigee:authentication required="true" /> 
  
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/app" /> 
+        <apigee:example url="/apps" /> 
  
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
 	    <doc title="" apigee:url="http://nodester.com/api.html"> 
@@ -300,7 +297,7 @@
 	
 	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
         <apigee:tags> 
-          <apigee:tag primary="true">App</apigee:tag> 
+          <apigee:tag primary="true">Apps</apigee:tag> 
           <apigee:tag>DeleteApp</apigee:tag> 
         </apigee:tags> 
     
@@ -309,7 +306,7 @@
         <apigee:authentication required="true" /> 
  
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/app/{appname}" /> 
+        <apigee:example url="/apps/{appname}" /> 
  
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
 	    <doc title="" apigee:url="http://nodester.com/api.html"> 
@@ -332,7 +329,7 @@
 
 	    <!-- Tags are used to organize the list of methods. Primary tag will list the default placement. --> 
         <apigee:tags> 
-          <apigee:tag primary="true">App</apigee:tag> 
+          <apigee:tag primary="true">Apps</apigee:tag> 
           <apigee:tag>GetAppInfo</apigee:tag> 
         </apigee:tags> 
 
@@ -341,7 +338,7 @@
         <apigee:authentication required="true" /> 
 
         <!-- Example element is used to specify the sample URL to display in the Console's request URL field. --> 
-        <apigee:example url="/app/{appname}" /> 
+        <apigee:example url="/apps/{appname}" /> 
 
         <!-- The content of the doc element is shown as a tooltip in the Console's method list. --> 
 	    <doc title="" apigee:url="http://nodester.com/api.html"> 
@@ -349,6 +346,8 @@
 	    </doc>     
 		
       </method> 
+
+
 
     </resource>  
 
